@@ -1,7 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
-import FacebookLogin from "react-facebook-login";
 
 const defaultWidth = 31;
 const defaultHeight = 23;
@@ -167,11 +166,7 @@ class Game extends React.Component {
         }
       ],
       stepNumber: 0,
-      xIsNext: true,
-      isLogin: false,
-      firstName: "",
-      timer: 0,
-      userEmail: ""
+      xIsNext: true
     };
   }
   jumpTo(step) {
@@ -258,31 +253,16 @@ class Game extends React.Component {
       <div class="content">
         <div className="game">
           <div className="game-board">
-            {this.state.isLogin && (
-              <Board
-                squares={current.squares}
-                onClick={(i, j) => this.handleClick(i, j)}
-                winner={winner}
-              />
-            )}
-          </div>
-          {this.state.isLogin && (
-            <div className="game-info">
-              {this.state.firstName} {this.state.timer}
-              <div>{this.state.userEmail}</div>
-              <div>{status}</div>
-              <ol>{moves}</ol>
-            </div>
-          )}
-          {!this.state.isLogin && (
-            <FacebookLogin
-              appId="331778040830658"
-              autoLoad={true}
-              fields="name,email,picture"
-              // onClick={componentClicked}
-              callback={this.responseFacebook}
+            <Board
+              squares={current.squares}
+              onClick={(i, j) => this.handleClick(i, j)}
+              winner={winner}
             />
-          )}
+          </div>
+          <div className="game-info">
+            <div>{status}</div>
+            <ol>{moves}</ol>
+          </div>
         </div>
       </div>
     );
